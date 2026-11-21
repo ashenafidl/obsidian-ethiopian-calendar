@@ -1,8 +1,177 @@
 /*
+ * Only Obsidian theme variables are used, so the calendar follows the active
+ * theme (light/dark, accent color, fonts, radii) without custom colors.
+ */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.ethcal-view {
+	container-type: inline-size;
+}
 
-If your plugin does not need CSS, delete this file.
+.ethcal {
+	max-width: var(--file-line-width);
+	margin: 0 auto;
+}
 
-*/
+/* Header: title on the left, controls on the right. */
+.ethcal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--size-4-3);
+	margin-bottom: var(--size-4-4);
+}
+
+.ethcal-title {
+	margin: 0;
+	font-size: var(--h1-size);
+	font-weight: var(--font-normal);
+	line-height: var(--line-height-tight);
+	color: var(--text-normal);
+}
+
+.ethcal-title-year {
+	color: var(--text-accent);
+	font-weight: var(--font-bold);
+}
+
+.ethcal-subtitle {
+	margin-top: var(--size-2-1);
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+}
+
+.ethcal-nav {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	gap: var(--size-4-1);
+}
+
+.ethcal-today {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	font-weight: var(--font-semibold);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* Month grid. */
+.ethcal-grid {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: var(--size-2-2);
+}
+
+.ethcal-grid th {
+	padding: var(--size-4-1) 0;
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: var(--font-medium);
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ethcal-grid td {
+	padding: 0;
+}
+
+/*
+ * Days are flat: no button background, border or shadow. The selectors are
+ * scoped under .ethcal-grid so they outrank Obsidian's default
+ * `button:not(.clickable-icon)` styling.
+ */
+.ethcal-grid button.ethcal-day {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--size-2-1);
+	width: 100%;
+	height: auto;
+	padding: var(--size-4-2) 0;
+	border: none;
+	border-radius: var(--radius-s);
+	background-color: transparent;
+	box-shadow: none;
+	color: var(--text-normal);
+}
+
+.ethcal-grid button.ethcal-day:hover {
+	background-color: var(--background-modifier-hover);
+}
+
+.ethcal-grid button.ethcal-day:focus-visible {
+	box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
+}
+
+.ethcal-day-eth {
+	font-size: var(--font-ui-large);
+	font-weight: var(--font-semibold);
+	line-height: var(--line-height-tight);
+}
+
+.ethcal-day-greg {
+	color: var(--text-muted);
+	font-size: calc(var(--font-ui-smaller) * 0.9);
+	line-height: var(--line-height-tight);
+}
+
+/* Days from the previous/next month. */
+.ethcal-grid button.ethcal-day.is-faded,
+.ethcal-day.is-faded .ethcal-day-greg {
+	color: var(--text-faint);
+}
+
+.ethcal-grid button.ethcal-day.is-today,
+.ethcal-day.is-today .ethcal-day-eth {
+	color: var(--text-accent);
+}
+
+.ethcal-grid button.ethcal-day.is-active,
+.ethcal-grid button.ethcal-day.is-active:hover {
+	background-color: var(--background-modifier-active-hover);
+}
+
+.ethcal-setting-preview {
+	color: var(--text-accent);
+}
+
+/*
+ * Narrow panes (e.g. the sidebar or a phone): the controls move below the
+ * title and spread across the full width.
+ */
+@container (max-width: 480px) {
+	.ethcal-header {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.ethcal-nav {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.ethcal-nav > * {
+		flex: 1 1 0;
+		justify-content: center;
+	}
+
+	.ethcal-grid {
+		border-spacing: var(--size-2-1);
+	}
+
+	.ethcal-grid button.ethcal-day {
+		padding: var(--size-4-1) 0;
+	}
+
+	.ethcal-day-eth {
+		font-size: var(--font-ui-medium);
+	}
+
+	.ethcal-day-greg {
+		font-size: calc(var(--font-ui-smaller) * 0.85);
+	}
+}

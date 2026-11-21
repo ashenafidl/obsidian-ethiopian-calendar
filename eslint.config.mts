@@ -29,4 +29,17 @@ export default defineConfig(
 		},
 	},
 	...obsidianmd.configs.recommended,
+	{
+		rules: {
+			'obsidianmd/ui/sentence-case': [
+				'warn',
+				{
+					// Proper nouns that must stay capitalized in UI text.
+					brands: ['Ethiopian', 'Gregorian', 'Amharic', 'Ge’ez', 'Kenat'],
+					// Date/time format strings and token lists are not prose.
+					ignoreRegex: ['^Tokens: ', '^[YMDdHhmsAa:/ -]+$'],
+				},
+			],
+		},
+	},
 );
