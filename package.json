@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-ethiopian-calendar",
 	"version": "0.1.0",
-	"description": "Ethiopian calendar view, date and time commands, and template variables.",
+	"description": "Insert Ethiopian dates and times, use date template variables, and browse a month calendar alongside Gregorian dates.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
