@@ -184,7 +184,9 @@ export class CalendarView extends ItemView {
 	}
 
 	private renderGrid(container: HTMLElement, month: CalendarMonth): void {
-		const table = container.createEl('table', { cls: 'ethcal-grid', attr: { 'aria-labelledby': TITLE_ID } });
+		// The `calendar` class is the convention themes (e.g. Minimal) use to skip their
+		// markdown-table tweaks such as row numbers: they target `table:not(.calendar)`.
+		const table = container.createEl('table', { cls: ['ethcal-grid', 'calendar'], attr: { 'aria-labelledby': TITLE_ID } });
 		const headRow = table.createEl('thead').createEl('tr');
 		for (const name of month.headers) {
 			headRow.createEl('th', {
